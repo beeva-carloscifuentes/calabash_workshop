@@ -1,0 +1,30 @@
+start_
+start_test_server_in_background
+query('*')
+exit
+start_test_server_in_background
+query('*')
+query('* id:login_button')
+query('* id:btn_login')
+query('id:btn_login')
+query('AppCompatButton id:btn_login')
+query('AppCompatButton marked:btn_login')
+query('AppCompatButton').count
+query('AppCompatButton, :btn_login').count
+query('AppCompatButton, id:btn_login')
+query('AppCompatButton id:btn_login')
+query("AppCompatButton id:btn_login")
+query("AppCompatButton id:'btn_login'")
+query("button id:'btn_login'")
+start_test_server_in_background
+query("AppCompatButton id:'btn_login'")
+exit
+exit
+start_test_server_in_background
+query('*')
+query('TextView')
+query('TextView, :text')
+start_test_server_in_background
+query("TextView").find { |x| x["text"] =~ /introduce una dire/ }.nil?
+query("TextView").find { |x| x["text"] =~ /introduce una direddd/ }.nil?
+exit

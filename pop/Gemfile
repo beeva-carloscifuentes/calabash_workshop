@@ -1,0 +1,19 @@
+source 'http://rubygems.org'
+
+# Gems to run tests
+gem 'calabash-android'
+gem 'calabash-cucumber'
+gem 'rspec'
+gem 'activesupport'
+gem 'require_all'
+gem 'rake'
+gem 'rspec-expectations'
+gem 'httparty'
+gem 'json'
+
+# Gems needed to debug
+gem 'byebug'
+
+# Gems needed to generate documentation
+gem 'colorize'
+gem 'syntax'
