@@ -1,5 +1,4 @@
 require 'calabash-android/calabash_steps'
-require 'byebug'
 
 Then(/^I check text "(.*?)"$/) do |text|
 
