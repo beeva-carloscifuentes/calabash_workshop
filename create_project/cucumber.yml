@@ -1,0 +1,21 @@
+#YAML Template
+#cucumber.yml
+
+#Android
+<% project_root = "" %>
+<% common_path = " -r impl/support/general -r impl/step_definitions -r impl/screens/general -r impl/helpers/general" %>
+<% android_common_path = " -r impl/support/android -r impl/helpers/android  -r impl/screens/android" %>
+<% ios_common_path = " -r impl/support/ios -r impl/helpers/ios  -r impl/screens/ios --format html -o impl/reports/ios.html" %>
+
+# run avd emulator: /Applications/Android/sdk/tools/emulator -avd Nexus_10_API_21 -netspeed full -netdelay none
+# RESET_BETWEEN_SCENARIOS=1
+android-json: PLATFORM=android SCREENSHOT_PATH=and_ <%= common_path %> <%= android_common_path %> --format json -o impl/reports/android.json -v
+android-html: PLATFORM=android SCREENSHOT_PATH=impl/reports/ <%= common_path %> <%= android_common_path %> -f 'Calabash::Formatters::Html' -o impl/reports/android.html -f pretty -v
+android-rerun: PLATFORM=android SCREENSHOT_PATH=impl/reports/ <%= common_path %> <%= android_common_path %> -f 'Calabash::Formatters::Html' --out impl/reports/android.html -f rerun --out impl/reports/failed-steps.txt -v
+android-rerun-failed: PLATFORM=android SCREENSHOT_PATH=impl/reports/ <%= common_path %> <%= android_common_path %> -f 'Calabash::Formatters::Html' --out impl/reports/android_rerun_failed.html -f rerun --out impl/reports/final-failed-steps.txt @impl/reports/failed-steps.txt -v
+android-custom-test-file: PLATFORM=android SCREENSHOT_PATH=impl/reports/ <%= common_path %> <%= android_common_path %> -f 'Calabash::Formatters::Html' --out impl/reports/android_custom_failed.html -f rerun --out impl/reports/final-failed-steps.txt
+
+# bundle exec calabash-android run app/app-debug.apk -p android-rerun --tags @regression
+# bundle exec calabash-android run app/app-debug.apk -p android-rerun-failed
+
+# ios: RESET_BETWEEN_SCENARIOS=1 PLATFORM=ios DEVICE_TARGET='iPad Air (8.2 Simulator)' SCREENSHOT_PATH=impl/reports/ios_ APP_BUNDLE_PATH=/Users/carlos.cifuentes/Library/Developer/Xcode/DerivedData/BBVABuzzTablet-esgdzbblogtmajbuuivwvnmfeowt/Build/Products/Debug-iphonesimulator/BBVABuzzTablet-cal.app <%= common_path %> <%= ios_common_path %> -v
